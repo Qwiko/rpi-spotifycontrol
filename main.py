@@ -108,7 +108,7 @@ def handle_click(button, spotify, uri, allowed_time, logger):
         current_context_uri = status.get("context").get("uri")
 
     # If we are playing on the selected device. We pause
-    if is_playing and playing_device_id == spotify.selected_device.get("id"):
+    if is_playing and playing_device_id == spotify.selected_device_id:
         # Pause
         logger.info(f"Pausing playback with pin: {button.get('pin')}")
         try:
