@@ -70,17 +70,11 @@ class Spotify():
 
         self.spotify.pause_playback()
 
-    def shuffle(self, status):
+    def shuffle(self, shuffle_state = True):
         if not self.selected_device_id:
             return
 
-        if not status:
-            status = {}
-
-        if status.get("shuffle_state"):
-            return
-
-        self.spotify.shuffle(True, self.selected_device_id)
+        self.spotify.shuffle(shuffle_state, self.selected_device_id)
 
 def handle_click(button, spotify, uri, allowed_time, logger):
     now = datetime.datetime.now()
@@ -129,25 +123,27 @@ def handle_click(button, spotify, uri, allowed_time, logger):
             #Next
             logger.info(f"Next playback with pin: {button.get('pin')}")
             try:
-                spotify.shuffle(status)
+                spotify.shuffle(True)
                 spotify.next()
             except spotipy.exceptions.SpotifyException as e:
                 logger.error(e)
                 logger.info("Waiting 2 seconds and trying again.")
                 time.sleep(2)
-                spotify.shuffle(status)
+                spotify.shuffle(True)
                 spotify.next()
         else:
             # Play
             logger.info(f"Starting playback with pin: {button.get('pin')}")
             try:
-                spotify.shuffle(status)
+                spotify.shuffle(False)
+                spotify.shuffle(True)
                 spotify.start(uri)
             except spotipy.exceptions.SpotifyException as e:
                 logger.error(e)
                 logger.info("Waiting 2 seconds and trying again.")
                 time.sleep(2)
-                spotify.shuffle(status)
+                spotify.shuffle(False)
+                spotify.shuffle(True)
                 spotify.start(uri)
 
 def main():
