@@ -20,7 +20,7 @@ sudo python3 setup.py install
 echo "Copying template to systemd"
 cat rpi-spotifycontrol.service.template | envsubst >  rpi-spotifycontrol.service
 
-sudo cp ./rpi-spotifycontrol.service /etc/systemd/system/rpi-spotifycontrol.service
+sudo mv ./rpi-spotifycontrol.service /etc/systemd/system/rpi-spotifycontrol.service
 
 # Reload daemon
 sudo systemctl daemon-reload
