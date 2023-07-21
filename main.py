@@ -44,10 +44,9 @@ class Spotify():
         devices = self.get_devices()
         selected_devices = [device for device in devices.get("devices") if device.get("name") == device_name]
         if not selected_devices:
-            self.logger.error(f"No device found with name: {device_name}, playback control disabled")
-            self.selected_device = None
-            self.selected_device_id = None
-            return
+            self.logger.error(f"No device found with name: {device_name}, sleeping for 5 seconds and exiting.")
+            time.sleep(5)
+            exit(1)
         self.selected_device = selected_devices[0]
         self.selected_device_id = self.selected_device.get("id")
         self.logger.info(f"Device found with id: {self.selected_device_id}")
@@ -71,15 +70,15 @@ class Spotify():
     def shuffle(self, status):
         if not self.selected_device_id:
             return
+
         if not status:
+            status = {}
+
+        if status.get("shuffle_state"):
             return
 
-        shuffle_state = status.get("shuffle_state")
-        if not shuffle_state:
-            self.logger.info("Shuffle enabled")
-            # Enable shuffle
-            self.spotify.shuffle(True, self.selected_device_id)
-            return
+        self.logger.info("Enabling Shuffle")
+        self.spotify.shuffle(True, self.selected_device_id)
 
 def handle_click(button, spotify, uri, allowed_time, logger):
     now = datetime.datetime.now()
@@ -153,7 +152,7 @@ def main():
     buttons = config.get("buttons")
     
     selected_device_name = config.get("selected_device_name")
-    allowed_time = config.get("allowed_time")
+    allowed_time = config.get("allowed_time") if config.get("allowed_time") else {}
 
     spotify.select_device(selected_device_name)
 

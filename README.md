@@ -8,3 +8,25 @@ curl https://raw.githubusercontent.com/Qwiko/rpi-spotifycontrol/master/initializ
 
 sh ./initialize.sh
 ```
+
+
+## config.json
+```json
+{
+    "allowed_time": {
+        "start": 6,
+        "end": 20
+    },
+    "debug": false,
+    "buttons": [
+        {
+            "spotify_uri": "",
+            "pin": 17
+        }
+    ],
+    "selected_device_name": "", // Exact name of the device to be controlled
+    "client_id": "",
+    "client_secret": "",
+    "redirect_uri": "" // http://localhost:9000
+}
+```
