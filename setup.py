@@ -17,6 +17,6 @@ setup(
     install_requires=[
         "gpiozero==1.6.2",
     ],
-    packages=['spotipy']
+    packages=['spotipy'],
     license='MIT'
 )
