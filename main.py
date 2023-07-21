@@ -165,7 +165,9 @@ def main():
     selected_device_name = config.get("selected_device_name")
     allowed_time = config.get("allowed_time") if config.get("allowed_time") else {}
 
-    spotify.select_device(selected_device_name)
+    # spotify.select_device(selected_device_name)
+
+    spotify.selected_device_id = config.get("selected_device_id")
 
     # Setting up buttons
     gpio_buttons = []
