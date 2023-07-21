@@ -2,15 +2,10 @@
 
 ## Install on host
 
+Place the script in your home directory
 ```bash
-sudo apt-get update -y
-sudo apt-get install python3-pip git
 
-# Clone repo
-git clone https://github.com/Qwiko/badrum.git
+curl https://raw.githubusercontent.com/Qwiko/rpi-spotifycontrol/master/initialize.sh
 
-cd badrum
-
-# Install dependencies
-sudo python3 setup.py install
+sudo sh ./initialize.sh
 ```

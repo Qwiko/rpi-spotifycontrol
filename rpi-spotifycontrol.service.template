@@ -1,0 +1,14 @@
+[Unit]
+Description=RPi Spotify Control
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u main.py
+WorkingDirectory=$HOME/badrum/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=$USER
+
+[Install]
+Wants=network.target
