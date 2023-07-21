@@ -1,5 +1,6 @@
 [Unit]
 Description=RPi Spotify Control
+Wants=network-online.target
 After=network-online.target
 
 [Service]
@@ -9,6 +10,3 @@ StandardOutput=inherit
 StandardError=inherit
 Restart=always
 User=$USER
-
-[Install]
-Wants=network.target
