@@ -3,7 +3,7 @@
 echo "APT Update"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq -y
 echo "Installing python3, python3-pip and git"
-sudo DEBIAN_FRONTEND=noninteractive apt-get -qq --assume-yes --force-yes install python3-pip git
+sudo DEBIAN_FRONTEND=noninteractive apt-get -qq --assume-yes --allow install python3-pip git
 
 # Clone repo
 echo "Cloning rpi-spotifycontrol repo"

@@ -15,8 +15,8 @@ setup(
         'Source': 'https://github.com/Qwiko/badrum',
     },
     install_requires=[
-        "spotipy==2.23.0",
         "gpiozero==1.6.2",
     ],
+    packages=['spotipy']
     license='MIT'
 )
