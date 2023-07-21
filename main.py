@@ -54,10 +54,16 @@ class Spotify():
     def get_status(self):
         return self.spotify.current_playback()
 
-    def start(self, uri):
+    def start(self, uri, status):
         if not self.selected_device_id:
             return
-        
+        if not status:
+            status = {"context": {}}
+
+        #Already on same context, play next song
+        if status.get("context").get("uri") == uri:
+            self.spotify.next_track(self.selected_device_id)
+            return
         # Play URI
         self.spotify.start_playback(self.selected_device_id, uri)
 
@@ -67,9 +73,16 @@ class Spotify():
 
         self.spotify.pause_playback()
 
-    def shuffle(self):
+    def shuffle(self, status):
         if not self.selected_device_id:
             return
+
+        if not status:
+            status = {}
+
+        if status.get("shuffle_state"):
+            return
+
         self.spotify.shuffle(True, self.selected_device_id)
 
 def handle_click(button, spotify, uri, allowed_time, logger):
@@ -116,12 +129,14 @@ def handle_click(button, spotify, uri, allowed_time, logger):
         # Play
         logger.info(f"Starting playback with pin: {button.get('pin')}")
         try:
-            spotify.start(uri)
+            spotify.shuffle(status)
+            spotify.start(uri, status)
         except spotipy.exceptions.SpotifyException as e:
             logger.error(e)
             logger.info("Waiting 2 seconds and trying again.")
             time.sleep(2)
-            spotify.start(uri)
+            spotify.shuffle(status)
+            spotify.start(uri, status)
 
 def main():
     config = import_config()
