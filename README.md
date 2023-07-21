@@ -9,7 +9,6 @@ curl https://raw.githubusercontent.com/Qwiko/rpi-spotifycontrol/master/initializ
 sh ./initialize.sh
 ```
 
-
 ## config.json
 ```json
 {
@@ -29,4 +28,11 @@ sh ./initialize.sh
     "client_secret": "",
     "redirect_uri": "" // http://localhost:9000
 }
+```
+
+## Update
+```bash
+cd ~/rpi-spotifycontrol
+git pull
+sudo systemctl restart rpi-spotifycontrol.service
 ```
