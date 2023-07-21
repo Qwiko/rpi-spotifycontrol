@@ -11,11 +11,17 @@ git clone https://github.com/Qwiko/rpi-spotifycontrol.git
 
 cd rpi-spotifycontrol
 
+# Update git
+git pull
+
 echo "Install rpi-spotifycontrol dependencies"
 sudo python3 setup.py install
 
 echo "Copying template to systemd"
 cat rpi-spotifycontrol.service.template | envsubst > /etc/systemd/system/rpi-spotifycontrol.service
+
+# Reload daemon
+sudo systemctl daemon-reload
 
 echo "Enabling and starting rpi-spotifycontrol.service"
 sudo systemctl enable rpi-spotifycontrol.service

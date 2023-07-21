@@ -4,8 +4,7 @@
 
 Place the script in your home directory
 ```bash
-
 curl https://raw.githubusercontent.com/Qwiko/rpi-spotifycontrol/master/initialize.sh -O
 
-sudo sh ./initialize.sh
+sh ./initialize.sh
 ```
