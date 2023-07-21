@@ -54,7 +54,7 @@ class Spotify():
     def get_status(self):
         return self.spotify.current_playback()
 
-    def start(self, uri, status):
+    def start(self, uri):
         if not self.selected_device_id:
             return
 
